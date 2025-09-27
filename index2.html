@@ -34,6 +34,13 @@
             font-size: 24px;
         }
         
+        .btn-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
         .btn-continue {
             background-color: white;
             color: black;
@@ -45,11 +52,46 @@
             width: 100%;
             transition: all 0.3s ease;
             font-weight: bold;
+            position: relative;
+            z-index: 10;
         }
         
         .btn-continue:hover {
             background-color: #f0f0f0;
             transform: scale(1.05);
+        }
+        
+        /* Efeito de pulsação azul */
+        .pulse-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            background-color: transparent;
+            border: 2px solid #1e90ff;
+            animation: pulse 2s infinite;
+            z-index: 5;
+        }
+        
+        .pulse-ring:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .pulse-ring:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
         }
         
         .instructions {
@@ -58,27 +100,33 @@
             font-size: 14px;
             line-height: 1.4;
             opacity: 0.8;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">Meus Conteúdos👇</div>
-        <button class="btn-continue" id="continueBtn">CLIQUE PARA CONTINUAR</button>
+        <div class="logo">Acesse 👇</div>
+        <div class="btn-wrapper">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <button class="btn-continue" id="continueBtn">CLIQUE PARA CONTINUAR</button>
+        </div>
         <div class="instructions" id="instructions">
-            Se a página não abrir automaticamente no navegador, copie este link e cole no seu navegador: https://google.com
+            Se a página não abrir automaticamente no navegador, copie este link e cole no seu navegador: https://linktr.ee/anagabriela004983
         </div>
     </div>
 
     <script>
         document.getElementById('continueBtn').addEventListener('click', function() {
             // Tentar abrir em uma nova janela/aba (possivelmente no navegador)
-            const newWindow = window.open('https://google.com', '_blank');
+            const newWindow = window.open('https://linktr.ee/anagabriela004983', '_blank');
             
             // Se não conseguir abrir em nova janela (bloqueado por popups, por exemplo)
             if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
                 // Tentar redirecionar a página atual
-                window.location.href = 'https://google.com';
+                window.location.href = 'https://linktr.ee/anagabriela004983';
             }
             
             // Mostrar instruções para o usuário
